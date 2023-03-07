@@ -16,7 +16,7 @@ public class AjaxResponse {
         AjaxResponse response = new AjaxResponse();
         response.setOK(true);
         response.setCode(200);
-        response.setMessage("Request Success");
+        response.setMessage("Request Success without Object");
 
         return response;
     }
@@ -25,7 +25,7 @@ public class AjaxResponse {
         AjaxResponse response = new AjaxResponse();
         response.setOK(true);
         response.setCode(200);
-        response.setMessage("Request Success");
+        response.setMessage("Request Success with Object");
         response.setData(obj);
 
         return response;

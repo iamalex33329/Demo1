@@ -3,6 +3,8 @@ package com.ctbcbank.lab1.controller;
 import com.ctbcbank.lab1.AjaxResponse;
 import com.ctbcbank.lab1.model.Article;
 import com.ctbcbank.lab1.model.Reader;
+import com.ctbcbank.lab1.service.ArticleService;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +17,10 @@ import java.util.List;
 @RestController     // @RestController 其實是 @Controller + method 的 @ResponseBody 的結合體
 @RequestMapping("/rest")
 public class ArticleController {
+
+    // 很常用的使用方法，Controller會調用Service
+    @Resource
+    ArticleService articleService;
 
     /*
     - 如果今天是用 @Controller，則必須加上 @ResponseBody 來返回 JSON 數據 (keywords: 序列化、反序列化)
@@ -51,10 +57,9 @@ public class ArticleController {
     // 可以接收大量對象，並且支援類別中還有類別的方式 >>> #以Article中還有List<Reader>為例
     // @RequestMapping(value = "/articles", method = RequestMethod.POST)
     @PostMapping("/articles")
-    public AjaxResponse saveArticle(@RequestBody Article article,
-                                    @RequestHeader String aaa) {
-        log.info("Save article: " + aaa);
-        return AjaxResponse.success();
+    public AjaxResponse saveArticle(@RequestBody Article article) {
+        log.info("Save article: " + article);
+        return AjaxResponse.success(articleService.saveArticle(article));
     }
 
     // 類似前端 form-data 的表格接收方式
@@ -87,12 +92,3 @@ public class ArticleController {
     }
 
 }
-
-
-
-
-
-
-
-
-

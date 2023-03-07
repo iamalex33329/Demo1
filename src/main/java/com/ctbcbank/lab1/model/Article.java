@@ -19,7 +19,7 @@ public class Article {
     private Long id;
 
     // 改變json的key輸出字串，不影響已經寫好的程式
-    @JsonProperty("auther")
+    // @JsonProperty("auther")
     private String author;
 
     private String title;
